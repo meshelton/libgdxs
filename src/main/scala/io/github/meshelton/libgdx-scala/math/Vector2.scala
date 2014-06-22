@@ -3,6 +3,12 @@ package io.github.meshelton.libgdxscala.math
 import com.badlogic.gdx.math.{Matrix3, Interpolation, Vector2 => JVector2, Vector3 => JVector3}
 
 object Vector2 extends JVector2 {
+  import scala.language.implicitConversions
+  implicit def tup2fToVector2(tup: (Float, Float)): Vector2 = Vector2(tup._1, tup._2)
+  implicit def tup2iToVector2(tup: (Int, Int)): Vector2 = Vector2(tup._1, tup._2)
+  implicit class Vector2FloatOps(val f: Float) {
+    def *(vec: Vector2): Vector2 = vec.scl(f)
+  }
   def apply() = new Vector2(0, 0)
   def apply(other: JVector2) = new Vector2(other.x, other.y)
   def apply(x: Float, y: Float) = new Vector2(x, y)
@@ -11,8 +17,8 @@ object Vector2 extends JVector2 {
   val X = Vector2(JVector2.X)
   val Y = Vector2(JVector2.Y)
   val Zero = Vector2(JVector2.Zero)
-}
 
+}
 class Vector2(x: Float, y: Float) extends JVector2(x, y) {
   def +(x: Float, y: Float) = add(x, y)
   def +(other: JVector2) = add(other)
