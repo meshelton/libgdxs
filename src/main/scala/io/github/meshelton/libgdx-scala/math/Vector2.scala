@@ -7,6 +7,7 @@ object Vector2 extends JVector2 {
   def apply(other: JVector2) = new Vector2(other.x, other.y)
   def apply(x: Float, y: Float) = new Vector2(x, y)
   def apply(vec: Vector3) = new Vector2(vec.x, vec.y)
+  def unapply(vec: JVector2) = Some((vec.x, vec.y))
   val X = Vector2(JVector2.X)
   val Y = Vector2(JVector2.Y)
   val Zero = Vector2(JVector2.Zero)
