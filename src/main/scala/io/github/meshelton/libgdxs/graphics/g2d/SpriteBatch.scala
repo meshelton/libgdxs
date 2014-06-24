@@ -1,7 +1,7 @@
 package io.github.meshelton.libgdxs.graphics.g2d
 
 import io.github.meshelton.libgdxs.graphics.Color
-import com.badlogic.gdx.graphics.g2d.{SpriteBatch => JSpriteBatch}
+import com.badlogic.gdx.graphics.g2d.{SpriteBatch => JSpriteBatch, Batch}
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Matrix4
 
@@ -27,6 +27,7 @@ trait SpriteBatch extends JSpriteBatch {
 
   // Safe to call batch.draw(???) in here
   def render( f: => Any): Unit = {
+    implicit val batch: Batch = this
     begin()
     f
     end()
