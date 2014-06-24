@@ -1,4 +1,4 @@
-package io.github.meshelton.libgdxscala.math
+package io.github.meshelton.libgdxs.math
 
 import com.badlogic.gdx.math.{Matrix3, Matrix4, Quaternion, 
   Vector2 => JVector2, Vector3 => JVector3}
