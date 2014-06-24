@@ -1,4 +1,4 @@
-package io.github.meshelton.libgdx.graphics
+package io.github.meshelton.libgdxs.graphics
 
 import com.badlogic.gdx.graphics.{Color => JColor}
 
