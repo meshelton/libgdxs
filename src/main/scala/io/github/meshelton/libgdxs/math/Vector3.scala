@@ -5,13 +5,36 @@ import com.badlogic.gdx.math.{Matrix3, Matrix4, Quaternion,
 
 
 object Vector3 extends JVector3 {
-  def apply() = new Vector3(0, 0, 0)
-  def apply(other: JVector3) = new Vector3(other.x, other.y, other.z)
-  def apply(x: Float, y: Float, z: Float) = new Vector3(x, y, z)
-  def apply(vec: JVector2, z: Float) = new Vector3(vec.x, vec.y, z)
+  def apply(): Vector3 = new Vector3(0, 0, 0)
+  def apply(other: JVector3): Vector3 = new Vector3(other.x, other.y, other.z)
+  def apply(x: Float, y: Float, z: Float): Vector3 = new Vector3(x, y, z)
+  def apply(vec: JVector2, z: Float): Vector3 = new Vector3(vec.x, vec.y, z)
+  def apply(values: Array[Float]): Vector3 = Vector3().set(values)
+  val X = Vector3(1, 0, 0)
+  val Y = Vector3(0, 1, 0)
+  val Z = Vector3(0, 0, 1)
+  val Zero = Vector3(0, 0, 0)
 }
 
 class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
+
+  def +(values: Float): Vector3 = add(values)
+  def +(x: Float, y: Float, z: Float): Vector3 = add(x, y, z)
+  def +(other: JVector3): Vector3 = add(other)
+  def -(values: Float): Vector3 = sub(values)
+  def -(x: Float, y: Float, z: Float): Vector3 = sub(x, y, z)
+  def -(other: JVector3): Vector3 = sub(other)
+  def x(x: Float, y: Float, z: Float): Vector3 = crs(x, y, z)
+  def x(other: JVector3): Vector3 = crs(other)
+  def *(mat: Matrix3): Vector3 = mul(mat)
+  def *(mat: Matrix4): Vector3 = mul(mat)
+  def *(quat: Quaternion): Vector3 = mul(quat)
+  def *+(vec: JVector3, scalar: Float): Vector3 = mulAdd(vec, scalar)
+  def *+(vec: JVector3, mulVec: JVector3): Vector3 = mulAdd(vec, mulVec)
+  def ^ = nor()
+  def *(scalar: Float): Vector3 = scl(scalar)
+  def *(x: Float, y: Float, z: Float): Vector3 = scl(x, y, z)
+  def *(v: JVector3): Vector3 = scl(v)
 
   override def clamp(min: Float, max: Float): Vector3 = {
     super.clamp(min, max)
@@ -29,6 +52,11 @@ class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
 
   override def lerp(target: JVector3, alpha: Float): Vector3 = {
     super.lerp(target, alpha)
+    this
+  }
+
+  override def limit(limit: Float): Vector3 = {
+    super.limit(limit)
     this
   }
 
@@ -84,7 +112,38 @@ class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
     super.mulAdd(vec, mulVec)
     this
   }
-  override def nor() = super.nor()
+  override def mul4x3(matrix: Array[Float]): Vector3 = {
+    super.mul4x3(matrix)
+    this
+  }
+  override def prj(matrix: Matrix4): Vector3 = {
+    super.prj(matrix)
+    this
+  }
+  override def rot(matrix: Matrix4): Vector3 = {
+    super.rot(matrix)
+    this
+  }
+  override def rotate(degree: Float, axisX: Float, axisY: Float, axisZ: Float): Vector3 = {
+    super.rotate(degree, axisX, axisY, axisZ)
+    this
+  }
+  override def rotate(axis: JVector3, degrees: Float): Vector3 = {
+    super.rotate(axis, degrees)
+    this
+  }
+  override def rotateRad(radians: Float, axisX: Float, axisY: Float, axisZ: Float): Vector3 = {
+    super.rotateRad(radians, axisX, axisY, axisZ)
+    this
+  }
+  override def rotateRad(axis: JVector3, radians: Float): Vector3 = {
+    super.rotateRad(axis, radians)
+    this
+  }
+  override def nor() = {
+    super.nor()
+    this
+  }
   override def scl(scalar: Float): Vector3 = {
     super.scl(scalar)
     this
@@ -97,23 +156,48 @@ class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
     super.scl(v)
     this
   }
+  override def set(values: Array[Float]): Vector3 = {
+    super.set(values)
+    this
+  }
+  override def set(x: Float, y: Float, z: Float): Vector3 = {
+    super.set(x, y, z)
+    this
+  }
+  override def set(vec: JVector2, z: Float): Vector3 = {
+    super.set(vec, z)
+    this
+  }
+  override def set(vec: JVector3): Vector3 = {
+    super.set(vec)
+    this
+  }
+  override def setZero(): Vector3 = {
+    super.setZero()
+    this
+  }
+  override def slerp(target: JVector3, alpha: Float): Vector3 = {
+    super.slerp(target, alpha)
+    this
+  }
+  override def traMul(mat: Matrix3): Vector3 = {
+    super.traMul(mat)
+    this
+  }
+  override def traMul(mat: Matrix4): Vector3 = {
+    super.traMul(mat)
+    this
+  }
+  override def unrotate(mat: Matrix4): Vector3 = {
+    super.unrotate(mat)
+    this
+  }
+  override def untransform(mat: Matrix4): Vector3 = {
+    super.untransform(mat)
+    this
+  }
 
-  def +(values: Float) = add(values)
-  def +(x: Float, y: Float, z: Float) = add(x, y, z)
-  def +(other: JVector3) = add(other)
-  def -(values: Float) = sub(values)
-  def -(x: Float, y: Float, z: Float) = sub(x, y, z)
-  def -(other: JVector3) = sub(other)
-  def x(x: Float, y: Float, z: Float) = crs(x, y, z)
-  def x(other: JVector3) = crs(other)
-  def *(mat: Matrix3) = mul(mat)
-  def *(mat: Matrix4) = mul(mat)
-  def *(quat: Quaternion) = mul(quat)
-  def *+(vec: JVector3, scalar: Float) = mulAdd(vec, scalar)
-  def *+(vec: JVector3, mulVec: JVector3) = mulAdd(vec, mulVec)
-  def ^ = nor()
-  def *(scalar: Float) = scl(scalar)
-  def *(x: Float, y: Float, z: Float) = scl(x, y, z)
-  def *(v: JVector3) = scl(v)
+
+
 
 }
