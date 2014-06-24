@@ -5,15 +5,26 @@ import com.badlogic.gdx.math.{Matrix3, Matrix4, Quaternion,
 
 
 object Vector3 extends JVector3 {
+  import scala.language.implicitConversions
+  implicit def tup3fToVector3(tup: (Float, Float, Float)): Vector3 = {
+    Vector3(tup._1, tup._2, tup._3)
+  }
+  implicit def tup3iToVector3(tup: (Int, Int, Int)): Vector3 = {
+    Vector3(tup._1, tup._2, tup._3)
+  }
+  implicit class Vector3FloatOps(val f: Float) {
+    def *(vec: Vector3): Vector3 = vec.scl(f)
+  }
+  def unapply(vec: JVector3): Option[(Float, Float, Float)] = Some((vec.x, vec.y, vec.z))
   def apply(): Vector3 = new Vector3(0, 0, 0)
   def apply(other: JVector3): Vector3 = new Vector3(other.x, other.y, other.z)
   def apply(x: Float, y: Float, z: Float): Vector3 = new Vector3(x, y, z)
   def apply(vec: JVector2, z: Float): Vector3 = new Vector3(vec.x, vec.y, z)
   def apply(values: Array[Float]): Vector3 = Vector3().set(values)
-  val X = Vector3(1, 0, 0)
-  val Y = Vector3(0, 1, 0)
-  val Z = Vector3(0, 0, 1)
-  val Zero = Vector3(0, 0, 0)
+  val X = Vector3(JVector3.X)
+  val Y = Vector3(JVector3.Y)
+  val Z = Vector3(JVector3.Z)
+  val Zero = Vector3(JVector3.Zero)
 }
 
 class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
