@@ -1,15 +1,31 @@
-package io.github.meshelton.libgdxscala.graphics
+package io.github.meshelton.libgdxs.graphics
 
 import com.badlogic.gdx.graphics.{Color => JColor}
 
 object Color extends JColor {
+  import scala.language.implicitConversions
+  implicit def tup4fToColor(tup: (Float, Float, Float, Float)): Color = {
+    Color(tup._1, tup._2, tup._3, tup._4)
+  }
+  implicit def tup4iToColor(tup: (Int, Int, Int, Int)): Color = {
+    Color(tup._1, tup._2, tup._3, tup._4)
+  }
+  def unapply(color: Color): Option[(Float, Float, Float, Float)] = {
+    Some((color.r, color.g, color.b, color.a))
+  }
   def apply(): Color = new Color(0, 0, 0, 0)
   def apply(color: JColor): Color = new Color(color.r, color.g, color.b, color.a)
   def apply(r: Float, g: Float, b: Float, a: Float): Color = new Color(r, g, b, a)
+  def apply(r: Int, g: Int, b: Int, a: Int): Color = {
+    Color(r/255.0f, g/255.0f, b/255.0f, a/255.0f)
+  }
   def apply(rgba8888: Int): Color = {
     val color = Color()
     JColor.rgba8888ToColor(color, rgba8888)
     color
+  }
+  def unapply(color: JColor): Option[(Float, Float, Float, Float)] = {
+    Some(color.r, color.g, color.b, color.a)
   }
   def valueOf(hex: String): Color = {
     Color(JColor.valueOf(hex))
