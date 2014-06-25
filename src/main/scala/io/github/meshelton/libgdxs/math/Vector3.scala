@@ -12,8 +12,27 @@ object Vector3 extends JVector3 {
   implicit def tup3iToVector3(tup: (Int, Int, Int)): Vector3 = {
     Vector3(tup._1, tup._2, tup._3)
   }
-  implicit class Vector3FloatOps(val f: Float) {
+  implicit class FloatVector3Ops(val f: Float) {
     def *(vec: Vector3): Vector3 = vec.scl(f)
+  }
+  implicit class JVector3Ops(val v: JVector3) {
+    def +(values: Float): JVector3 = v.add(values)
+    def +(x: Float, y: Float, z: Float): JVector3 = v.add(x, y, z)
+    def +(other: JVector3): JVector3 = v.add(other)
+    def -(values: Float): JVector3 = v.sub(values)
+    def -(x: Float, y: Float, z: Float): JVector3 = v.sub(x, y, z)
+    def -(other: JVector3): JVector3 = v.sub(other)
+    def x(x: Float, y: Float, z: Float): JVector3 = v.crs(x, y, z)
+    def x(other: JVector3): JVector3 = v.crs(other)
+    def *(mat: Matrix3): JVector3 = v.mul(mat)
+    def *(mat: Matrix4): JVector3 = v.mul(mat)
+    def *(quat: Quaternion): JVector3 = v.mul(quat)
+    def *+(vec: JVector3, scalar: Float): JVector3 = v.mulAdd(vec, scalar)
+    def *+(vec: JVector3, mulVec: JVector3): JVector3 = v.mulAdd(vec, mulVec)
+    def ^(): JVector3 = v.nor()
+    def *(scalar: Float): JVector3 = v.scl(scalar)
+    def *(x: Float, y: Float, z: Float): JVector3 = v.scl(x, y, z)
+    def *(v: JVector3): JVector3 = v.scl(v)
   }
   def unapply(vec: JVector3): Option[(Float, Float, Float)] = Some((vec.x, vec.y, vec.z))
   def apply(): Vector3 = new Vector3(0, 0, 0)
