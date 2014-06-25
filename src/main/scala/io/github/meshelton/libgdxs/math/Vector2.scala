@@ -6,8 +6,23 @@ object Vector2 extends JVector2 {
   import scala.language.implicitConversions
   implicit def tup2fToVector2(tup: (Float, Float)): Vector2 = Vector2(tup._1, tup._2)
   implicit def tup2iToVector2(tup: (Int, Int)): Vector2 = Vector2(tup._1, tup._2)
-  implicit class Vector2FloatOps(val f: Float) {
+  implicit class FloatVector2Ops(val f: Float) {
     def *(vec: Vector2): Vector2 = vec.scl(f)
+  }
+  implicit class JVector2Ops(val v: JVector2) {
+    def +(x: Float, y: Float): JVector2 = v.add(x, y)
+    def +(other: JVector2): JVector2 = v.add(other)
+    def -(x: Float, y: Float): JVector2 = v.sub(x, y)
+    def -(other: JVector2): JVector2 = v.sub(other)
+    def x(x: Float, y: Float): Float = v.crs(x, y)
+    def x(other: JVector2): Float = v.crs(other)
+    def *(mat: Matrix3): JVector2 = v.mul(mat)
+    def *+(vec: JVector2, scalar: Float): JVector2 = v.mulAdd(vec, scalar)
+    def *+(vec: JVector2, mulVec: JVector2): JVector2 = v.mulAdd(vec, mulVec)
+    def ^(): JVector2 = v.nor()
+    def *(scalar: Float): JVector2 = v.scl(scalar)
+    def *(x: Float, y: Float): JVector2 = v.scl(x, y)
+    def *(v: JVector2): JVector2 = v.scl(v)
   }
   def apply() = new Vector2(0, 0)
   def apply(other: JVector2) = new Vector2(other.x, other.y)
