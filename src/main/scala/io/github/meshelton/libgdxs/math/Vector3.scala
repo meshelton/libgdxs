@@ -21,10 +21,10 @@ object Vector3 extends JVector3 {
   def apply(x: Float, y: Float, z: Float): Vector3 = new Vector3(x, y, z)
   def apply(vec: JVector2, z: Float): Vector3 = new Vector3(vec.x, vec.y, z)
   def apply(values: Array[Float]): Vector3 = Vector3().set(values)
-  val X = Vector3(JVector3.X)
-  val Y = Vector3(JVector3.Y)
-  val Z = Vector3(JVector3.Z)
-  val Zero = Vector3(JVector3.Zero)
+  def X = Vector3(JVector3.X)
+  def Y = Vector3(JVector3.Y)
+  def Z = Vector3(JVector3.Z)
+  def Zero = Vector3(JVector3.Zero)
 }
 
 class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
