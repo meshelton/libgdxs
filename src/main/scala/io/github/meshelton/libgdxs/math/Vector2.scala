@@ -24,8 +24,6 @@ class Vector2(x: Float, y: Float) extends JVector2(x, y) {
   def +(other: JVector2) = add(other)
   def -(x: Float, y: Float) = sub(x, y)
   def -(other: JVector2) = sub(other)
-  def x(x: Float, y: Float) = crs(x, y)
-  def x(other: JVector2) = crs(other)
   def *(mat: Matrix3) = mul(mat)
   def *+(vec: JVector2, scalar: Float) = mulAdd(vec, scalar)
   def *+(vec: JVector2, mulVec: JVector2) = mulAdd(vec, mulVec)

@@ -35,8 +35,6 @@ class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
   def -(values: Float): Vector3 = sub(values)
   def -(x: Float, y: Float, z: Float): Vector3 = sub(x, y, z)
   def -(other: JVector3): Vector3 = sub(other)
-  def x(x: Float, y: Float, z: Float): Vector3 = crs(x, y, z)
-  def x(other: JVector3): Vector3 = crs(other)
   def *(mat: Matrix3): Vector3 = mul(mat)
   def *(mat: Matrix4): Vector3 = mul(mat)
   def *(quat: Quaternion): Vector3 = mul(quat)
@@ -46,6 +44,8 @@ class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
   def *(scalar: Float): Vector3 = scl(scalar)
   def *(x: Float, y: Float, z: Float): Vector3 = scl(x, y, z)
   def *(v: JVector3): Vector3 = scl(v)
+
+  def toList: List[Float] = List(this.x, this.y, this.z)
 
   override def clamp(min: Float, max: Float): Vector3 = {
     super.clamp(min, max)
