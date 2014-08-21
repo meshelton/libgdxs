@@ -32,6 +32,8 @@ class Vector2(x: Float, y: Float) extends JVector2(x, y) {
   def *(x: Float, y: Float) = scl(x, y)
   def *(v: JVector2) = scl(v)
 
+  def toList: List[Float] = List(this.x, this.y)
+
   override def add(x: Float, y: Float): Vector2 = {
     super.add(x, y)
     this
