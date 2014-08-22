@@ -19,7 +19,8 @@ object Vector2 extends JVector2 {
   val Zero = Vector2(JVector2.Zero)
 
 }
-class Vector2(x: Float, y: Float) extends JVector2(x, y) {
+
+class Vector2(_x: Float, _y: Float) extends JVector2(_x, _y) {
   def +(x: Float, y: Float) = add(x, y)
   def +(other: JVector2) = add(other)
   def -(x: Float, y: Float) = sub(x, y)

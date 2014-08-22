@@ -27,7 +27,7 @@ object Vector3 extends JVector3 {
   def Zero = Vector3(JVector3.Zero)
 }
 
-class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
+class Vector3(_x: Float, _y: Float, _z: Float) extends JVector3(_x, _y, _z) {
 
   def +(values: Float): Vector3 = add(values)
   def +(x: Float, y: Float, z: Float): Vector3 = add(x, y, z)
@@ -46,6 +46,7 @@ class Vector3(x: Float, y: Float, z: Float) extends JVector3(x, y, z) {
   def *(v: JVector3): Vector3 = scl(v)
 
   def toList: List[Float] = List(this.x, this.y, this.z)
+  def toTuple: (Float, Float, Float) = (x, y, z)
 
   override def clamp(min: Float, max: Float): Vector3 = {
     super.clamp(min, max)
