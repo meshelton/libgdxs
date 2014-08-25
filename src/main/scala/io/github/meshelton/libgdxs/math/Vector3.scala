@@ -29,6 +29,11 @@ object Vector3 extends JVector3 {
 
 class Vector3(_x: Float, _y: Float, _z: Float) extends JVector3(_x, _y, _z) {
 
+  override def equals(o: Any) = o match {
+      case that: JVector3 => that.x == x && that.y == y && that.z == z
+      case _ => false
+    }
+
   def +(values: Float): Vector3 = add(values)
   def +(x: Float, y: Float, z: Float): Vector3 = add(x, y, z)
   def +(other: JVector3): Vector3 = add(other)
