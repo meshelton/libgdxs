@@ -35,6 +35,11 @@ class Vector2(_x: Float, _y: Float) extends JVector2(_x, _y) {
 
   def toList: List[Float] = List(this.x, this.y)
 
+  override def equals(o: Any) = o match {
+      case that: JVector2 => that.x == x && that.y == y
+      case _ => false
+    }
+
   override def add(x: Float, y: Float): Vector2 = {
     super.add(x, y)
     this
