@@ -34,6 +34,7 @@ class Vector2(_x: Float, _y: Float) extends JVector2(_x, _y) {
   def *(v: JVector2) = scl(v)
 
   def toList: List[Float] = List(this.x, this.y)
+  def toTuple: (Float, Float) = (x, y)
 
   override def equals(o: Any) = o match {
       case that: JVector2 => that.x == x && that.y == y
