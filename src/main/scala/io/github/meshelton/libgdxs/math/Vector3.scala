@@ -15,6 +15,9 @@ object Vector3 extends JVector3 {
   implicit class Vector3FloatOps(val f: Float) {
     def *(vec: Vector3): Vector3 = vec.scl(f)
   }
+  implicit def vector3ToList(vec: Vector3): List[Float] = {
+    vec.x :: vec.y :: vec.z :: Nil
+  }
   def unapply(vec: JVector3): Option[(Float, Float, Float)] = Some((vec.x, vec.y, vec.z))
   def apply(): Vector3 = new Vector3(0, 0, 0)
   def apply(other: JVector3): Vector3 = new Vector3(other.x, other.y, other.z)
