@@ -4,7 +4,7 @@ import Keys._
 object BuildSettings {
   val buildOrganization = "io.github.meshelton"
   val buildVersion      = "0.1"
-  val buildScalaVersion = "2.11.1"
+  val buildScalaVersion = "2.11.2"
 
   val buildSettings = Seq (
     organization := buildOrganization,
@@ -25,7 +25,6 @@ object Resolvers {
 object Dependencies {
   val libgdxVersion = "1.2.0"
   val scalatestVersion = "1.4.1"
-
 
   val libgdx = "com.badlogicgames.gdx" % "gdx" % libgdxVersion
   val libgdxLwjgl = "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % libgdxVersion
